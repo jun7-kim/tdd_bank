@@ -2,13 +2,13 @@ class Account
 {
 public:
 	explicit Account(int money)
-		: balance(money)
+		: balance(money), curInterest(0.05)
 	{
 	}
 
 	int getBalance()
 	{
-		return balance;
+		return (int)balance;
 	}
 
 	void deposit(int money)
@@ -21,6 +21,30 @@ public:
 		balance -= meney;
 	}
 
+	void calculate(int year)
+	{
+		for (int i =0; i<year;i++)
+		{
+			balance += balance * curInterest;
+		}
+	}
+
+	void setInterest(int interestPercent)
+	{
+		curInterest = (float)interestPercent / 100;
+	}
+
+	int estimate(int year)
+	{
+		float temp = balance;
+		for (int i = 0; i < year;i++)
+		{
+			temp += temp * curInterest;
+		}
+		return (int)temp;
+	}
+
 private:
-	int balance;
+	float balance;
+	float curInterest;
 };
